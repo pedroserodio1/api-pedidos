@@ -22,6 +22,11 @@ export default function isAuthenticate(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const decodedToken = verify(token, authConfig.jwt.secret);
 
+        const { sub } = decodedToken as { sub: string };
+
+        req.user = {
+            id: sub,
+        };
 
         return next();
     } catch {
