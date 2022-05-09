@@ -16,20 +16,17 @@ model Products {
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
-  Orders      Orders[]
 }
 
 model Orders {
   id          String   @id @default(uuid())
-  productsId  String
   client      String
   status      String
   observation String?
-  userChange  String   @unique
+  userChange  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
-  Products    Products @relation(fields: [productsId], references: [id])
-  User        Users    @relation(fields: [userChange], references: [id])
+  productsId  String[]
 }
 
 model Users {
@@ -39,5 +36,4 @@ model Users {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  Orders    Orders?
 }
